@@ -1,14 +1,14 @@
 import requests
 import json
 import pandas as pd
-
+file_path = "sleeper_data.json"
 # Sleeper data - free easy api
 #https://api.sleeper.app/projections/nfl/<season>/<week>?season_type=regular&position[]=FLEX&position[]=K&position[]=QB&position[]=RB&position[]=TE&position[]=WR&position[]=DEF
-sleeper_projection_url = "https://api.sleeper.app/projections/nfl/2024/1?season_type=regular&position[]=WR&team=[]CIN"
+sleeper_projection_url = "https://api.sleeper.app/projections/nfl/2024/1?season_type=regular&position[]=QB"
 sleeper_projection_response = requests.get(sleeper_projection_url)
 sleeper_projection_json = sleeper_projection_response.json()
 sleeper_projection_df = pd.DataFrame(sleeper_projection_json)
-sleeper_projection_df.head()
+sleeper_projection_df.to_json(file_path, orient="records", indent=4)
 #print(sleeper_projection_json, indent = 4)
 
 # # ESPN data - unofficial api
